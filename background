@@ -1,0 +1,30 @@
+const pornSites = [
+  "pornhub.com", "xvideos.com", "xhamster.com", "redtube.com",
+  "xnxx.com", "onlyfans.com", "rule34.xxx", "spankbang.com"
+];
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.url) {
+    const url = new URL(changeInfo.url);
+    const domain = url.hostname.replace("www.", "");
+
+    if (pornSites.some(site => domain.includes(site))) {
+      console.log("Porn site visited:", domain);
+      sendRelapse();
+    }
+  }
+});
+
+function sendRelapse() {
+  fetch("https://your-backend.com/api/relapse", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId: "example_user"  // Replace with real auth in full version
+    })
+  })
+  .then(res => console.log("Relapse sent"))
+  .catch(err => console.error("Error sending relapse:", err));
+}
