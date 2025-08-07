@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "No Nut Tracker",
+  "version": "1.0",
+  "description": "Tracks visits to adult sites and resets your streak.",
+  "permissions": ["tabs", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "No Nut Tracker"
+  }
+}
